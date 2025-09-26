@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "cargo run -p pointercrate-example --release"
+
+[env]
+NIXPACKS_BUILD_CMD = "cargo build -p pointercrate-example --release"
