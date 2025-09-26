@@ -1,5 +1,5 @@
-# Etapa 1: compilación
 FROM rust:1.81 as builder
+RUN rustup install nightly && rustup default nightly
 
 WORKDIR /app
 COPY . .
@@ -10,12 +10,11 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cargo build -p pointercrate-examples --release
+RUN cargo build --release -p pointercrate-examples
 
-# Etapa 2: runtime
 FROM debian:bullseye-slim
-
 WORKDIR /app
+
 COPY --from=builder /app/target/release/pointercrate-examples /app/pointercrate-examples
 
 RUN apt-get update && apt-get install -y \
