@@ -193,7 +193,7 @@ async fn rocket() -> _ {
 fn page_configuration() -> PageConfiguration {
     // Define a navigation bar with only two items, a link to the user account page,
     // and a link to your demonlist.
-    let nav_bar = NavigationBar::new("/static/images/path/to/your/logo.png")
+    let nav_bar = NavigationBar::new("/static/demonlist/images/tff.png")
         .with_item(
             TopLevelNavigationBarItem::new(
                 Some("/demonlist/"),
