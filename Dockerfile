@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cargo build --release -p pointercrate-example
 
 FROM debian:bullseye-slim
 WORKDIR /app
