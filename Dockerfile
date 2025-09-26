@@ -1,20 +1,27 @@
-# Imagen oficial de Rust para compilar
-FROM rust:1.73 as builder
+# Etapa 1: compilación
+FROM rust:1.81 as builder
 
 WORKDIR /app
 COPY . .
 
-# Compilar en release
-RUN cargo build -p pointercrate-example --release
+RUN apt-get update && apt-get install -y \
+    pkg-config \
+    libssl-dev \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Imagen final más liviana
+RUN cargo build -p pointercrate-examples --release
+
+# Etapa 2: runtime
 FROM debian:bullseye-slim
 
 WORKDIR /app
-COPY --from=builder /app/target/release/pointercrate-example /app/pointercrate-example
+COPY --from=builder /app/target/release/pointercrate-examples /app/pointercrate-examples
 
-# Exponer el puerto (ajústalo si tu app escucha en otro)
+RUN apt-get update && apt-get install -y \
+    libssl1.1 \
+    libpq5 \
+    && rm -rf /var/lib/apt/lists/*
+
 EXPOSE 8000
-
-# Ejecutar
-CMD ["./pointercrate-example"]
+CMD ["./pointercrate-examples"]
