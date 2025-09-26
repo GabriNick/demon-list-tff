@@ -10,12 +10,12 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cargo build --release -p pointercrate-examples
+RUN cargo build --release -p pointercrate-example
 
 FROM debian:bullseye-slim
 WORKDIR /app
 
-COPY --from=builder /app/target/release/pointercrate-examples /app/pointercrate-examples
+COPY --from=builder /app/target/release/pointercrate-example /app/pointercrate-example
 
 RUN apt-get update && apt-get install -y \
     libssl1.1 \
