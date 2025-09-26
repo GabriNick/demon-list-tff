@@ -24,5 +24,5 @@ resolver = "2"
 authors = ["stadust"]
 description = "Libraries for creating pointercrate-like demonlist websites"
 homepage = "https://pointercrate.com"
-edition = "2025"
+edition = "2021"
 repository = "https://github.com/GabriNick/demon-list-tff"
