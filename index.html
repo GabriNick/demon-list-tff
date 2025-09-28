@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TFF Demon List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcikiLz4KPHRleHQgeD0iMjAiIHk9IjI2IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+dGZmPC90ZXh0Pgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyIiB4MT0iMCIgeTE9IjAiIHgyPSI0MCIgeTI9IjQwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM5Q0ZGNjciLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNkZEQzM3Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K" alt="TFF Logo" class="logo" onclick="goToMain()">
+                <span class="brand-name">TFF Demon List</span>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#" onclick="showMainList()" class="nav-link active">Main List</a></li>
+                    <li><a href="#" onclick="showExtendedList()" class="nav-link">Extended List</a></li>
+                    <li><a href="#" onclick="showLegacyList()" class="nav-link">Legacy List</a></li>
+                    <li><a href="#" onclick="showStatsViewer()" class="nav-link">Stats</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="login-btn" onclick="showLoginModal()">
+                    <i class="fab fa-discord"></i>
+                    Login with Discord
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- List View -->
+            <div id="list-view" class="list-view">
+                <div class="list-header">
+                    <h1 id="list-title">Main List</h1>
+                    <p id="list-description">The top 75 hardest demons</p>
+                </div>
+                <div class="list-container" id="demon-list">
+                    <!-- Demon list items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Stats Viewer -->
+            <div id="stats-view" class="stats-view hidden">
+                <div class="stats-header">
+                    <h1>Statistics</h1>
+                    <div class="stats-tabs">
+                        <button class="stats-tab active" onclick="showGlobalStats()">Global</button>
+                        <button class="stats-tab" onclick="showCountryStats()">Countries</button>
+                        <button class="stats-tab" onclick="showClanStats()">Clans</button>
+                    </div>
+                </div>
+                <div class="stats-container" id="stats-container">
+                    <!-- Stats content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- User Profile -->
+            <div id="profile-view" class="profile-view hidden">
+                <div class="profile-header">
+                    <div class="profile-info">
+                        <img src="" alt="Profile Picture" class="profile-avatar" id="profile-avatar">
+                        <div class="profile-details">
+                            <h1 id="profile-username">Username</h1>
+                            <p id="profile-clan">TFF</p>
+                            <img src="" alt="Country Flag" class="country-flag" id="profile-flag">
+                        </div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat-card">
+                            <h3>Points</h3>
+                            <p id="profile-points">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Completed</h3>
+                            <p id="profile-completed">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Rank</h3>
+                            <p id="profile-rank">#0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-tabs">
+                        <button class="profile-tab active" onclick="showCompletedLevels()">Completed</button>
+                        <button class="profile-tab" onclick="showProgressLevels()">Progress</button>
+                    </div>
+                    <div class="profile-levels" id="profile-levels">
+                        <!-- User's levels will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Panel -->
+            <div id="admin-view" class="admin-view hidden">
+                <div class="admin-header">
+                    <h1>Admin Panel</h1>
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" onclick="showLevelManagement()">Levels</button>
+                        <button class="admin-tab" onclick="showRecordManagement()">Records</button>
+                        <button class="admin-tab" onclick="showUserManagement()">Users</button>
+                    </div>
+                </div>
+                <div class="admin-content" id="admin-content">
+                    <!-- Admin content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Submit Record Modal -->
+    <div id="submit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Submit Record</h2>
+                <span class="close" onclick="closeSubmitModal()">&times;</span>
+            </div>
+            <form id="submit-form" class="submit-form">
+                <div class="form-group">
+                    <label for="level-select">Level</label>
+                    <select id="level-select" required>
+                        <option value="">Select a level</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="percentage">Percentage</label>
+                    <input type="number" id="percentage" min="1" max="100" required>
+                    <small class="form-help">Minimum: <span id="min-percentage">0</span>%</small>
+                </div>
+                <div class="form-group">
+                    <label for="video-link">Video Link (YouTube)</label>
+                    <input type="url" id="video-link" placeholder="https://youtube.com/watch?v=" required>
+                </div>
+                <div class="form-group">
+                    <label for="raw-footage">Raw Footage (Optional)</label>
+                    <input type="url" id="raw-footage" placeholder="Link to raw footage">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Notes (Optional)</label>
+                    <textarea id="notes" rows="3" placeholder="Any additional information..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeSubmitModal()">Cancel</button>
+                    <button type="submit">Submit Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Discord Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content login-modal">
+            <div class="modal-header">
+                <h2>Connect with Discord</h2>
+                <span class="close" onclick="closeLoginModal()">&times;</span>
+            </div>
+            <div class="login-content">
+                <div class="discord-auth">
+                    <div class="auth-icons">
+                        <div class="tff-icon">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcikiLz4KPHR1ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPnRmZjwvdGV4dD4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhciIgeDE9IjAiIHkxPSIwIiB4Mj0iNDAiIHkyPSI0MCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjOUNGRjY3Ii8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzZGREMzNyIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="TFF">
+                        </div>
+                        <div class="discord-icon">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                    </div>
+                    <p>This will allow TFF Demon List to:</p>
+                    <ul class="permissions">
+                        <li><i class="fas fa-check"></i> Access your profile information</li>
+                        <li><i class="fas fa-check"></i> Access your username, avatar and banner</li>
+                        <li><i class="fas fa-times"></i> Plant a small happy tree</li>
+                    </ul>
+                    <div class="auth-actions">
+                        <button class="cancel-btn" onclick="closeLoginModal()">Cancel</button>
+                        <button class="auth-btn" onclick="authenticateDiscord()">Authorize</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Record Button -->
+    <div class="submit-record-btn" onclick="showSubmitModal()" title="Submit Record">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
